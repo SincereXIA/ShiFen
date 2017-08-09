@@ -26,4 +26,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function messagesOnBoard()
+    {
+        return $this->hasMany('App\Messageboard', 'user_id');
+    }
 }

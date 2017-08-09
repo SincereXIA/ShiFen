@@ -70,9 +70,7 @@ class ProgressController extends Controller
     {
 
         $progressLog = ProgressLog::findOrFail($id);
-        $progressLog->update([
-            'body' => $request->body,
-        ]);
+        $progressLog->update($request->all());
 
         return redirect()->route('progress.index');;
     }

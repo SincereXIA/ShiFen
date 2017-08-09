@@ -35,3 +35,5 @@ GET	    /photos/{photo}	        show	photos.show
 GET	    /photos/{photo}/edit    edit	photos.edit
 PUT/PATCH/photos/{photo}	    update	photos.update
 DELETE	/photos/{photo}	        destroy	photos.destroy*/
+
+Route::resource('messageBoard', 'Project\MessageBoardController');
