@@ -17,7 +17,7 @@
                 <li style="margin: 50px 0;">
                     <div class="body">
                         <p>
-                            {{ $progressLog->created_at }}
+                            {{ $progressLog->created_at->diffForHumans() }}
                         </p>
                         <p>{{ $progressLog->body }}</p>
                     </div>
@@ -26,6 +26,10 @@
                             <a class="btn btn-default" href="{{ route('progress.edit', $progressLog->id) }}">
                                 编辑
                             </a>
+                            {!! Form::open(['route'=>['progress.destroy',$progressLog->id]]) !!}
+                            {{ method_field('DELETE') }}
+                            {!! Form::submit('删除',['class'=>'btn btn-danger']) !!}
+                            {!! Form::close() !!}
                         </div>
                     @endif
                 </li>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Project;
 
+use App\Http\Requests\CreatProgressLogRequset;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\ProgressLog;
@@ -16,7 +17,7 @@ class ProgressController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index(){
-        $progressLogs = ProgressLog::orderBy('created_at')->get();
+        $progressLogs = ProgressLog::latest('created_at')->get();
         Auth::id()==1 ? $editRight = true:$editRight = false;
         return view('showIndex.progressLog',compact('progressLogs','editRight'));
     }
@@ -34,18 +35,18 @@ class ProgressController extends Controller
 
     /**
      * post -> 存储新的processLog到数据库
-     * @param Request $request
+     * @param CreatProgressLogRequset|Request $request
      * @return \Illuminate\Http\RedirectResponse|void
      */
-    public function store(Request $request){
+    public function store(CreatProgressLogRequset $request)
+    {
         $id = Auth::id();
         if($id == 1){
             $processLog = ProgressLog::create([
                 'user_id' => $id,
                 'body' => $request->body,
             ]);
-        }
-        else return abort('403', '非法用户权限');
+        } else return abort('403', '非法用户权限');
         return redirect()->route('progress.index');
     }
 
@@ -61,17 +62,25 @@ class ProgressController extends Controller
 
     /**
      * process 更新
-     * @param Request $request
+     * @param CreatProgressLogRequset|Request $request
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request,$id){
+    public function update(CreatProgressLogRequset $request, $id)
+    {
 
-        $processLog = ProgressLog::findOrFail($id);
-        $processLog->update([
+        $progressLog = ProgressLog::findOrFail($id);
+        $progressLog->update([
             'body' => $request->body,
         ]);
 
         return redirect()->route('progress.index');;
+    }
+
+    public function destroy($id)
+    {
+        $progressLog = ProgressLog::findOrFail($id);
+        $progressLog->delete();
+        return redirect()->route('progress.index');
     }
 }
