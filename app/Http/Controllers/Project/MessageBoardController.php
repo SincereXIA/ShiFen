@@ -121,6 +121,7 @@ class MessageBoardController extends Controller
     /**
      * 回复一条message
      * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function reply($id)
     {
