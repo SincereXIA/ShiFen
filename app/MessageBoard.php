@@ -10,7 +10,7 @@ class MessageBoard extends Model
     protected $table = 'message_board';
 
     protected $fillable = [
-        'body', 'user_id',
+        'body', 'user_id', 'comment_id',
     ];
 
     public function user()

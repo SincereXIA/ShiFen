@@ -17,8 +17,9 @@ class MessageBoardController extends Controller
      */
     public function index()
     {
-        $messagesOnBoard = MessageBoard::latest()->get();
-        return view('messageBoard.index', compact('messagesOnBoard'));
+        $messagesOnBoard = MessageBoard::where('comment_id', '=', 0)->latest()->get();
+        $commentsOnBoard = MessageBoard::where('comment_id', '>', 0)->get();
+        return view('messageBoard.index', compact('messagesOnBoard', 'commentsOnBoard'));
     }
 
     /**
@@ -49,6 +50,7 @@ class MessageBoardController extends Controller
             $messageOnBoard = MessageBoard::create([
                 'body' => $request->body,
                 'user_id' => null,
+                'comment_id' => $request->comment_id,
             ]);
         }
 
@@ -75,7 +77,10 @@ class MessageBoardController extends Controller
      */
     public function edit($id)
     {
-        //
+        $messageOnBoard = MessageBoard::findOrFail($id);
+        if ($messageOnBoard->user_id == Auth::id()) {
+            return view('messageBoard.edit', compact('messageOnBoard', 'id'));
+        } else abort('403', '无访问权限,请检查用户登录');
     }
 
     /**
@@ -87,7 +92,14 @@ class MessageBoardController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $messageOnBoard = MessageBoard::findOrFail($id);
+        if ($messageOnBoard->user_id == Auth::id()) {
+            $messageOnBoard->update($request->all());
+        } else {
+            abort('403', '请检查用户权限');
+        }
+
+        return redirect()->route('messageBoard.index');
     }
 
     /**
@@ -98,6 +110,21 @@ class MessageBoardController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $message = MessageBoard::findOrFail($id);
+        if ($message->user->id == Auth::id()) {
+            $message->delete();
+        }
+        return redirect()->route('messageBoard.index');
+
+    }
+
+    /**
+     * 回复一条message
+     * @param $id
+     */
+    public function reply($id)
+    {
+        $message = MessageBoard::findOrFail($id);
+        return view('messageBoard.reply', compact('message', 'id'));
     }
 }
