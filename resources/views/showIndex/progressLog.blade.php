@@ -19,7 +19,7 @@
                         <p>
                             {{ $progressLog->created_at->diffForHumans() }}
                         </p>
-                        <p>{{ $progressLog->body }}</p>
+                        <p style="font-size: medium">{{ $progressLog->body }}</p>
                     </div>
                     @if($editRight == true)
                         <div class="btn btn-group">

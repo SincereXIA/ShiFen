@@ -71,7 +71,7 @@
         <div class="col-xs-10 col-xs-offset-1 links">
             <a class="col-xs-6 col-md-3" href="{{ url('/about') }}">关于拾纷</a>
             <a class="col-xs-6 col-md-3" href="{{ url('/progress') }}">项目进展</a>
-            <a class="col-xs-6 col-md-3">作者主页</a>
+            <a class="col-xs-6 col-md-3" href="http://blog.sumblog.cn">作者主页</a>
             <a class="col-xs-6 col-md-3" href="{{ route('messageBoard.index') }}">留言板</a>
         </div>
     </div>
