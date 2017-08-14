@@ -38,3 +38,9 @@ DELETE	/photos/{photo}	        destroy	photos.destroy*/
 
 Route::resource('messageBoard', 'Project\MessageBoardController');
 Route::get('/messageBoard/reply/{id}', 'Project\MessageBoardController@reply')->name('messageBoard.reply');
+
+Route::group(['prefix' => 'voyager'], function () {
+    Voyager::routes();
+});
+
+Route::get('/admin','AdminController@index');
