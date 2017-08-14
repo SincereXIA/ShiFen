@@ -43,4 +43,6 @@ Route::group(['prefix' => 'voyager'], function () {
     Voyager::routes();
 });
 
-Route::get('/admin','AdminController@index');
+Route::group(['prefix' => '/admin', 'middleware' => 'superAdmin'], function () {
+    Route::get('/', 'AdminController@index');
+});
