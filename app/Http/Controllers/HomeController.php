@@ -25,11 +25,17 @@ class HomeController extends Controller
     public function index()
     {
         $auth = Auth::user();
+        return view('home.index', compact('auth'));
+    }
+
+    public function signLog()
+    {
+        $auth = Auth::user();
         $absentTimes = $auth->signLogs()->where('status', '=', 'absent')->count();
         $offTimes = $auth->signLogs()->where('status', '=', 'off')->count();
         $lateTimes = $auth->signLogs()->where('status', '=', 'late')->count();
         $attendTimes = $auth->signLogs()->where('status', '=', 'attend')->count();
-        return view('home', compact(
+        return view('home.signLog', compact(
             'absentTimes',
             'offTimes',
             'lateTimes',
