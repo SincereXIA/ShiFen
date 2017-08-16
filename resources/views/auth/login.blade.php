@@ -13,7 +13,7 @@
                         <div class="form-group{{ $errors->has('student_id') ? ' has-error' : '' }}">
                             <label for="student_id" class="col-md-4 control-label">学号</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-xs-12">
                                 <input id="student_id" type="student_id" class="form-control" name="student_id"
                                        value="{{ old('student_id') }}" required autofocus>
 
@@ -28,7 +28,7 @@
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password" class="col-md-4 control-label">登录密码</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-xs-12">
                                 <input id="password" type="password" class="form-control" name="password" required>
 
                                 @if ($errors->has('password'))
@@ -42,7 +42,7 @@
                         <div class="form-group">
                             <label for="password" class="col-md-4 control-label">特征校验</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-xs-12">
                                 {!! Geetest::render() !!}
                             </div>
                         </div>
@@ -76,3 +76,5 @@
     </div>
 </div>
 @endsection
+
+
