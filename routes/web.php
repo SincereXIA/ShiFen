@@ -38,7 +38,7 @@ DELETE	/photos/{photo}	        destroy	photos.destroy*/
 Route::resource('/messageBoard', 'Project\MessageBoardController');
 Route::get('/messageBoard/reply/{id}', 'Project\MessageBoardController@reply')->name('messageBoard.reply');
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'voyager'], function () {
     Voyager::routes();
 });
 
@@ -52,6 +52,12 @@ Route::group(['prefix' => '/home'], function () {
     Route::resource('sign-excuse', 'Sign\ExcuseController');
 });
 
-//Route::resourse('sign-table','Sign\TableController');
+Route::resource('sign-table', 'Sign\TableController');
 
+Route::group(['prefix' => 'admin'], function () {
+    Route::get('sign-excuse', 'Admin\Sign\ExcuseController@index')->name('sign-excuse.adminIndex');
+    Route::get('sign-excuse/{excuse_id}', 'Admin\Sign\ExcuseController@show')->name('sign-excuse.adminShow');
+    Route::patch('sign-excuse/{excuse_id}/pass', 'Admin\Sign\ExcuseController@pass')->name('sign-excuse.pass');
+    Route::patch('sign-excuse/{excuse_id}/refuse', 'Admin\Sign\ExcuseController@refuse')->name('sign-excuse.refuse');
 
+});

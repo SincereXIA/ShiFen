@@ -52,7 +52,7 @@ class User extends Authenticatable
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function group()
+    public function groups()
     {
         return $this->belongsToMany('App\Group', 'user_group', 'user_id', 'group_id');
     }
@@ -82,8 +82,19 @@ class User extends Authenticatable
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function approvalExcuse()
+    public function approvalExcuses()
     {
         return $this->hasMany('App\SignExcuse', 'censor_id');
     }
+
+    /**
+     * 用户拥有的，具有管理权限的组
+     *
+     * @return $this
+     */
+    public function adminGroups()
+    {
+        return $this->groups()->whereIn('group_id', \DB::table('groups')->whereNotNull('admin_group_id')->pluck('admin_group_id'));
+    }
+
 }

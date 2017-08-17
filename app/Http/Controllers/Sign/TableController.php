@@ -14,7 +14,16 @@ class TableController extends Controller
      */
     public function index()
     {
-        //
+        //获取用户具有管理权限的用户组
+        $allAdminAtGroups = [];
+        foreach ($adminGroups = \Auth::user()->adminGroups as $adminGroup) {
+            $allAdminAtGroups[$adminGroup->id] = $adminGroup->adminAtGroups;
+        }
+        /*
+         * $adminGroups 用户有管理权限的用户组
+         * $allAdminAtGroups 每个有管理权限的用户组所管理的组 键名为管理权限的组ID 二维数组！
+         */
+        return view('sign.table.index', compact('adminGroups', 'allAdminAtGroups'));
     }
 
     /**
@@ -24,7 +33,7 @@ class TableController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**

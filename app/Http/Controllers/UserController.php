@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -80,5 +81,22 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * 获取用户管理的所有用户组
+     *
+     * @return array
+     */
+    public function allAdminAtGroups($id)
+    {
+        //获取用户具有管理权限的用户组
+        $allAdminAtGroups = [];
+        foreach (User::findOrFail($id)->adminGroups as $adminGroup) {
+            $allAdminAtGroups[$adminGroup->id] = $adminGroup->adminAtGroups;
+        }
+
+        //返回二维数组 键名：管理组id 键值：被管理组管理的用户组array
+        return $allAdminAtGroups;
     }
 }
