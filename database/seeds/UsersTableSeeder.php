@@ -24,5 +24,17 @@ class UsersTableSeeder extends Seeder
                 'role_id' => $role->id,
             ]);
         }
+        $users = [];
+        for ($i = 10; $i < 40; $i++) {
+            $user = [
+                'name' => \Illuminate\Support\Str::random($length = 8),
+                'password' => bcrypt('password'),
+                'remember_token' => str_random(60),
+                'student_id' => '160301660' . (string)$i,
+                'email' => rand(1000000, 99999999) . '@qq.com',
+            ];
+            $users[] = $user;
+        }
+        DB::table('users')->insert($users);
     }
 }

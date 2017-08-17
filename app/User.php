@@ -72,7 +72,7 @@ class User extends Authenticatable
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function signExcuse()
+    public function signExcuses()
     {
         return $this->hasMany('App\SignExcuse', 'user_id');
     }

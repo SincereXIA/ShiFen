@@ -38,18 +38,20 @@ DELETE	/photos/{photo}	        destroy	photos.destroy*/
 Route::resource('/messageBoard', 'Project\MessageBoardController');
 Route::get('/messageBoard/reply/{id}', 'Project\MessageBoardController@reply')->name('messageBoard.reply');
 
-Route::group(['prefix' => 'voyager'], function () {
+Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
 
-Route::group(['prefix' => '/admin', 'middleware' => 'superAdmin'], function () {
+Route::group(['prefix' => '/superadmin', 'middleware' => 'superAdmin'], function () {
     Route::get('/', 'AdminController@index');
 });
 
 Route::group(['prefix' => '/home'], function () {
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('/sign-log', 'HomeController@signLog')->name('userSignLog');
-    Route::resource('/sign-excuse', 'Sign\ExcuseController');
+    Route::resource('sign-excuse', 'Sign\ExcuseController');
 });
+
+//Route::resourse('sign-table','Sign\TableController');
 
 

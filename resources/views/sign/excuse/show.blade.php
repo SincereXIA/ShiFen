@@ -20,21 +20,22 @@
                     <div class="x_content">
                         <br>
                         <form class="form-horizontal form-label-left" method="post"
-                              action="{{ route('sign-excuse.store') }}">
+                              action="{{ route('sign-excuse.destroy',$excuse->id) }}">
+                            {{ method_field('DELETE') }}
 
 
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">姓名</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
                                     <input name="name" type="text" class="form-control" readonly="readonly"
-                                           value="{{ $auth->userInfo->real_name }}">
+                                           value="{{ \App\User::findOrFail($excuse->user_id)->userInfo->real_name }}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">学号</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
                                     <input name="student_id" type="text" class="form-control" readonly="readonly"
-                                           value="{{ $auth->student_id }}">
+                                           value="{{ \App\User::findOrFail($excuse->user_id)->student_id }}">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -42,35 +43,34 @@
                                             class="required">*</span>
                                 </label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <textarea name="reason" class="form-control" rows="3" placeholder="请假原因"></textarea>
+                                    <textarea name="reason" class="form-control" rows="3"
+                                              readonly="readonly">{{ $excuse->reason }}</textarea>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">开始日期</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <input name="start_time" type="datetime-local"
+                                    <input name="start_at" type="" readonly="readonly"
                                            class="form-control has-feedback-left" id=""
-                                           value="{{ Carbon\Carbon::now() }}">
+                                           value="{{ $excuse->start_at }}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">结束日期</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <input name="end_time" type="datetime-local" class="form-control has-feedback-left"
-                                           id=""
-                                           value="{{ Carbon\Carbon::now() }}">
+                                    <input name="end_at" type="" readonly="readonly"
+                                           class="form-control has-feedback-left" id=""
+                                           value="{{ $excuse->end_at }}">
                                 </div>
                             </div>
-
-
                             <div class="ln_solid"></div>
                             <div class="form-group">
                                 <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+                                    <a class="btn btn-primary" href="{{ back() }}">返回</a>
+                                    <a class="btn btn-primary" href="{{ route('sign-excuse.edit',$excuse->id) }}">编辑</a>
+                                    <input name="id" type="hidden" value="{{ $excuse->id }}">
                                     {{ csrf_field() }}
-                                    <button type="button" class="btn btn-primary">Cancel</button>
-                                    <button type="reset" class="btn btn-primary">Reset</button>
-                                    <button type="submit" class="btn btn-success">Submit</button>
-                                    {{ Carbon\Carbon::now() }}
+                                    <button type="submit" class="btn btn-danger">删除</button>
                                 </div>
                             </div>
 

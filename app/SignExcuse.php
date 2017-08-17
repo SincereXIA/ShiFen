@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class SignExcuse extends Model
 {
     protected $table = 'sign_excuses';
+    protected $fillable = ['user_id', 'start_at', 'end_at', 'reason', 'status', 'censor_id'];
 
     /**
      * 属于的用户

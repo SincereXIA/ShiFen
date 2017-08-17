@@ -180,6 +180,7 @@ return [
 
         Collective\Html\HtmlServiceProvider::class,
         Germey\Geetest\GeetestServiceProvider::class,
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 
     ],
 

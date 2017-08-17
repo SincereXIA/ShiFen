@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Sign;
 
+use App\SignExcuse;
+use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +18,11 @@ class ExcuseController extends Controller
      */
     public function index()
     {
-        //
+        $user = User::findOrFail(Auth::id());
+        $checkings = $user->SignExcuses()->where('status', 'checking')->get();
+        $refuses = $user->SignExcuses()->where('status', 'refuse')->get();
+        $passes = $user->SignExcuses()->where('status', 'ok')->get();
+        return view('sign.excuse.index', compact('checkings', 'refuses', 'passes'));
     }
 
     /**
@@ -37,7 +44,13 @@ class ExcuseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $excuse = new SignExcuse();
+        $excuse::create([
+            'user_id' => User::where('student_id', '=', $request->student_id)->firstOrFail()->id,
+            'start_at' => Carbon::createFromFormat('Y-m-d\TH:i', $request->start_time)->toDateTimeString(),
+            'end_at' => Carbon::createFromFormat('Y-m-d\TH:i', $request->end_time)->toDateTimeString(),
+            'reason' => $request->reason,
+        ]);
     }
 
     /**
@@ -48,7 +61,8 @@ class ExcuseController extends Controller
      */
     public function show($id)
     {
-        //
+        $excuse = SignExcuse::findOrFail($id);
+        return view('sign.excuse.show', compact('excuse'));
     }
 
     /**
@@ -59,7 +73,8 @@ class ExcuseController extends Controller
      */
     public function edit($id)
     {
-        //
+        $excuse = SignExcuse::findOrFail($id);
+        return view('sign.excuse.edit', compact('excuse'));
     }
 
     /**
@@ -71,7 +86,11 @@ class ExcuseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $excuse = SignExcuse::findOrFail($id);
+        $excuse->reason = $request->reason;
+        $excuse->start_at = Carbon::createFromFormat('Y-m-d\TH:i', $request->start_at)->toDateTimeString();
+        $excuse->end_at = Carbon::createFromFormat('Y-m-d\TH:i', $request->end_at)->toDateTimeString();
+        $excuse->update();
     }
 
     /**
@@ -82,6 +101,6 @@ class ExcuseController extends Controller
      */
     public function destroy($id)
     {
-        //
+        SignExcuse::destroy($id);
     }
 }
