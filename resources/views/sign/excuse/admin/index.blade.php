@@ -41,7 +41,7 @@
                                                     <?php $j = 0 ?>
                                                     <tr>
                                                         <th scope="row" style="line-height: 30px">{{ ++$j }}</th>
-                                                        <td style="line-height: 30px">{{ \App\User::findOrFail($groupExcuse->user_id)->name}}</td>
+                                                        <td style="line-height: 30px">{{ \App\User::findOrFail($groupExcuse->user_id)->userInfo? \App\User::findOrFail($groupExcuse->user_id)->userInfo->real_name : \App\User::findOrFail($groupExcuse->user_id)->name}}</td>
                                                         <td style="line-height: 30px">{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $groupExcuse->start_at)->diffForHumans() }}</td>
                                                         <td>
                                                             <form method="post"

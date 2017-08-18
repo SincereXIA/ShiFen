@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\SignExcuse;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -98,5 +99,36 @@ class UserController extends Controller
 
         //返回二维数组 键名：管理组id 键值：被管理组管理的用户组array
         return $allAdminAtGroups;
+    }
+
+    /**
+     * 判断用户是否处于请假状态
+     *
+     * @param $user_id
+     * @return bool
+     */
+    public function isLeave($user_id)
+    {
+        if (count(\DB::select(
+                'select * from `sign_excuses` where user_id =' . (string)$user_id . ' AND UNIX_TIMESTAMP(end_at) > UNIX_TIMESTAMP()')) > 0) {
+            return true;
+        } else
+            return false;
+    }
+
+    /**
+     * 用户还没过期的请假条
+     * @param $user_id
+     * @return array
+     */
+    public function getExcuses($user_id)
+    {
+        $excuses = [];
+        if ($this->isLeave($user_id)) {
+            foreach (\DB::select('select * from `sign_excuses` where user_id = ' . (string)$user_id . ' AND UNIX_TIMESTAMP(end_at) > UNIX_TIMESTAMP()') as $dbExcuse) {
+                $excuses[] = SignExcuse::findOrFail($dbExcuse->id);
+            }
+        }
+        return $excuses;
     }
 }

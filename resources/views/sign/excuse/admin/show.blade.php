@@ -8,7 +8,8 @@
             <div class="col-md-8 col-sm-8 col-md-offset-2 col-sm-offset-2 col-xs-12">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>{{ $excuse->user->userInfo->real_name }}的请假
+                        <h2>{{ \App\User::findOrFail($excuse->user_id)->userInfo? \App\User::findOrFail($excuse->user_id)->userInfo->real_name : \App\User::findOrFail($excuse->user_id)->name }}
+                            的请假
                             <small>Sessions</small>
                         </h2>
                         <ul class="nav navbar-right panel_toolbox">
@@ -28,7 +29,7 @@
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">姓名</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
                                     <input name="name" type="text" class="form-control" readonly="readonly"
-                                           value="{{ \App\User::findOrFail($excuse->user_id)->userInfo->real_name }}">
+                                           value="{{ \App\User::findOrFail($excuse->user_id)->userInfo? \App\User::findOrFail($excuse->user_id)->userInfo->real_name : \App\User::findOrFail($excuse->user_id)->name }}">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -71,7 +72,16 @@
                                     <input name="id" type="hidden" value="{{ $excuse->id }}">
                                     {{ csrf_field() }}
                                     <button type="submit" class="btn btn-danger">拒绝</button>
-                                    <form method="post" action="{{ route('sign-excuse.destroy',$excuse->id) }}">
+                                    <form method="post" style="display: inline"
+                                          action="{{ route('sign-excuse.pass',$excuse->id) }}">
+                                        {{ csrf_field() }}
+                                        {{ method_field('PATCH') }}
+                                        <button type="submit" class="btn btn-success">
+                                            通过
+                                        </button>
+                                    </form>
+                                    <form method="post" style="display: inline"
+                                          action="{{ route('sign-excuse.destroy',$excuse->id) }}">
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
                                         <button type="submit" class="btn btn-danger">删除</button>

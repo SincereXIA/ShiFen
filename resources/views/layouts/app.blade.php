@@ -19,6 +19,8 @@
     <link href="{{ asset('/vendors/pnotify/dist/pnotify.css') }}" rel="stylesheet">
     <link href="{{ asset('/vendors/pnotify/dist/pnotify.buttons.css') }}" rel="stylesheet">
     <link href="{{ asset('/vendors/pnotify/dist/pnotify.nonblock.css') }}" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="{{ asset('/vendors/iCheck/skins/flat/green.css') }}" rel="stylesheet">
 
     <!-- Custom styling plus plugins -->
     <link href="{{ asset('build/css/custom.min.css') }}" rel="stylesheet">
@@ -131,6 +133,8 @@
 <script src="{{ asset('/vendors/pnotify/dist/pnotify.js') }}"></script>
 <script src="{{ asset('/vendors/pnotify/dist/pnotify.buttons.js') }}"></script>
 <script src="{{ asset('/vendors/pnotify/dist/pnotify.nonblock.js') }}"></script>
+<!-- iCheck -->
+<script src="{{ asset('/vendors/iCheck/icheck.min.js') }}"></script>
 
 <!-- Custom Theme Scripts -->
 <script src="{{ asset('build/js/custom.min.js') }}"></script>

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class SignLog extends Model
 {
     protected $table = 'sign_logs';
+    protected $fillable = ['user_id', 'event_id', 'status', 'excuse_id'];
 
     /**
      * 属于的用户

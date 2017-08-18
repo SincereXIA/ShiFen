@@ -88,4 +88,5 @@ class ExcuseController extends Controller
         $excuse = SignExcuse::findOrFail($excuse_id);
         return view('sign.excuse.admin.show', compact('excuse'));
     }
+
 }

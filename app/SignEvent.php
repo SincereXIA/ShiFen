@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class SignEvent extends Model
 {
+
+    protected $fillable = ['event_name', 'group_id', 'event_time', 'censor_id'];
     /**
      * 签到项目所属的用户组
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
