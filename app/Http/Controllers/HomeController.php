@@ -25,7 +25,13 @@ class HomeController extends Controller
     public function index()
     {
         $auth = Auth::user();
-        return view('home.index', compact('auth'));
+        if (count($auth->adminGroups) > 0) {
+            $adminRight = true;
+        } else {
+            $adminRight = false;
+        }
+        return view('home.index', compact('auth', 'adminRight'))->withErrors(['拾纷目前处于建构状态！'])
+            ->with('info', ['欢迎您，感谢您参与拾纷的内部测试，若您在测试中发现了任何问题，或是有好的建议，请与作者联系s']);
     }
 
     public function signLog()

@@ -5,7 +5,8 @@
     <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 
     <title>拾纷|@yield('title')</title>
 
@@ -33,7 +34,8 @@
         <div class="col-md-3 left_col">
             <div class="left_col scroll-view">
                 <div class="navbar nav_title" style="border: 0;">
-                    <a href="{{ route('home') }}" class="site_title"><i class="fa fa-home"></i> <span>拾纷Alpha</span></a>
+                    <a href="{{ asset('/') }}" class="site_title"><i class="glyphicon glyphicon-th-large"
+                                                                     style="border: 0;"></i> <span>拾纷Alpha</span></a>
                 </div>
 
                 <div class="clearfix"></div>
@@ -44,19 +46,29 @@
                 <!-- sidebar menu -->
                 <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                     <div class="menu_section">
-                        <h3>General</h3>
+                        <h3>用户面板</h3>
                         <ul class="nav side-menu">
-                            <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
-                                <ul class="nav child_menu">
-                                </ul>
+                            <li><a href="{{ route('home') }}"><i class="fa fa-home"></i> 功能面板 </a>
+                            </li>
+                            <li><a href="{{ route('userSignLog') }}"><i class="fa fa-edit"></i> 点名记录 </a>
+                            </li>
+                            <li><a href="{{ route('sign-excuse.index') }}"><i class="fa fa-file-text"></i> 请假记录 </a>
+                            </li>
+                            <li><a href="{{ route('sign-excuse.create') }}"><i class="fa fa-pencil"></i> 新建请假 </a>
                             </li>
                         </ul>
                     </div>
-                    <div class="menu_section">
-                        <h3>Live On</h3>
-
-                    </div>
-
+                    @if(Auth::check()&&Auth::user()->adminGroups->count()>0)
+                        <div class="menu_section">
+                            <h3>管理面板</h3>
+                            <ul class="nav side-menu">
+                                <li><a href="{{ route('sign-excuse.adminIndex') }}"><i class="fa fa-home"></i> 审核假条 </a>
+                                </li>
+                                <li><a href="{{ route('sign-table.index') }}"><i class="fa fa-edit"></i> 点名面板 </a>
+                                </li>
+                            </ul>
+                        </div>
+                    @endif
                 </div>
                 <!-- /sidebar menu -->
 
@@ -144,9 +156,22 @@
     @foreach ($errors->all() as $error)
         <script type="application/javascript">
             new PNotify({
-                title: '{{ $error }}',
-                text: '',
+                title: '警告',
+                text: '{{ $error }}',
                 type: 'error',
+                styling: 'bootstrap3'
+            });
+        </script>
+    @endforeach
+@endif
+
+@if (defined('info'))
+    @foreach ($info as $inf)
+        <script type="application/javascript">
+            new PNotify({
+                title: '通知',
+                text: '{{ $inf }}',
+                type: 'info',
                 styling: 'bootstrap3'
             });
         </script>

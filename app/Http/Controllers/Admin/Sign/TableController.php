@@ -82,51 +82,95 @@ class TableController extends Controller
             }
             SignLog::create($signLog);
         }
-
+        return redirect()->route('sign-table.show', $signEventId);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param $signEvent_id
      * @return \Illuminate\Http\Response
+     * @internal param int $id
      */
-    public function show($id)
+    public function show($signEvent_id)
     {
-        //
+        $signEvent = SignEvent::findOrFail($signEvent_id);
+        $signLogs = $signEvent->signLogs()->orderBy('user_id')->get();
+        return view('sign.table.show', compact('signEvent', 'signLogs'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param  int $signEvent_id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($signEvent_id)
     {
-        //
+        $signEvent = SignEvent::findOrFail($signEvent_id);
+        $signLogs = $signEvent->signLogs()->orderBy('user_id')->get();
+        return view('sign.table.edit', compact('signEvent', 'signLogs'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param $signEvent_id
      * @return \Illuminate\Http\Response
+     * @internal param int $id
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $signEvent_id)
     {
-        //
+        $signEvent = SignEvent::findOrfail($signEvent_id);
+        $signLogs = $signEvent->signLogs()->get();
+
+        foreach ($signLogs as $signLog) {
+            if ($request->has($signLog->id)) {
+                if ($request[$signLog->id] == '到课')
+                    $signLog->status = 'attend';
+                elseif ($request[$signLog->id] == '旷课')
+                    $signLog->status = 'absent';
+                elseif ($request[$signLog->id] == '请假')
+                    $signLog->status = 'off';
+                elseif ($request[$signLog->id] == '请假')
+                    $signLog->status = 'off';
+            }
+            $signLog->update();
+        }
+
+        $signEvent->event_name = $request->event_name;
+        $signEvent->update();
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param $signEvent_id
      * @return \Illuminate\Http\Response
+     * @internal param int $id
      */
-    public function destroy($id)
+    public function destroy($signEvent_id)
     {
-        //
+        $signEvent_id = SignEvent::findOrFail($signEvent_id)->group->id;
+        $signLogs = SignLog::where('event_id', $signEvent_id)->get();
+        foreach ($signLogs as $signLog) {
+            $signLog->delete();
+        }
+        SignEvent::destroy($signEvent_id);
+        return redirect()->route('sign-table.groupShow', $signEvent_id);
+    }
+
+    /**
+     * 展示组内的所有签到表
+     *
+     * @param $group_id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function group($group_id)
+    {
+        $group = Group::findOrFail($group_id);
+        $signEvents = $group->signEvents;
+        return view('sign.table.groupShow', compact('group', 'signEvents'));
     }
 }

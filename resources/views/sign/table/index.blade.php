@@ -43,7 +43,9 @@
                                                         <a class="btn btn-info btn-lg"
                                                            href="{{ route('sign-table.create',$adminAtGroup->id) }}"><i
                                                                     class="fa fa-pencil"></i> 点名啦</a>
-                                                        <a class="btn btn-success btn-lg"><i class="fa fa-database"></i>
+                                                        <a class="btn btn-success btn-lg"
+                                                           href="{{ route('sign-table.groupShow', $adminAtGroup->id) }}"><i
+                                                                    class="fa fa-database"></i>
                                                             看历史</a>
                                                     </p>
                                                 </div>

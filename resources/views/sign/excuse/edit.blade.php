@@ -1,4 +1,4 @@
-@extends('layouts.app2')
+@extends('layouts.app')
 
 @section('content')
 
@@ -17,8 +17,12 @@
                         </ul>
                         <div class="clearfix"></div>
                     </div>
-                    <div class="x_content">
+                    <div class="x_content" style="background: url({{ asset('/image/xidian.jfif') }}) no-repeat 100% 0">
                         <br>
+                        <p style="font-weight: bold;font-size: medium">
+                            西安电子科技大学请假条<br>（网络存根）
+                        </p>
+                        <hr class="clearfix col-xs-12">
                         <form class="form-horizontal form-label-left" method="post"
                               action="{{ route('sign-excuse.update',$excuse->id) }}">
                             {{ method_field('PATCH') }}
@@ -53,7 +57,7 @@
                                 <div class="col-md-9 col-sm-9 col-xs-12">
                                     <input name="start_at" type="datetime-local" class="form-control has-feedback-left"
                                            id=""
-                                           value="{{ $excuse->start_at }}">
+                                           value="{{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$excuse->start_at)->format('Y-m-d\TH:i') }}">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -61,7 +65,7 @@
                                 <div class="col-md-9 col-sm-9 col-xs-12">
                                     <input name="end_at" type="datetime-local" class="form-control has-feedback-left"
                                            id=""
-                                           value="{{ $excuse->end_at }}">
+                                           value="{{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$excuse->end_at)->format('Y-m-d\TH:i') }}">
                                 </div>
                             </div>
                             <div class="ln_solid"></div>

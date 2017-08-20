@@ -15,7 +15,6 @@
     return view('welcome');
 });*/
 
-Route::resource('articles','ArticlesController');
 
 Route::group(['prefix' => ''], function(){
     Route::get('','ShowIndexController@index');
@@ -59,8 +58,18 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('sign-excuse/{excuse_id}', 'Admin\Sign\ExcuseController@show')->name('sign-excuse.adminShow');
     Route::patch('sign-excuse/{excuse_id}/pass', 'Admin\Sign\ExcuseController@pass')->name('sign-excuse.pass');
     Route::patch('sign-excuse/{excuse_id}/refuse', 'Admin\Sign\ExcuseController@refuse')->name('sign-excuse.refuse');
-    Route::get('sign-table/', 'Admin\Sign\TableController@index');
+    Route::get('sign-table/', 'Admin\Sign\TableController@index')->name('sign-table.index');
     Route::get('sign-table/create/{group_id}', 'Admin\Sign\TableController@create')->name('sign-table.create');
     Route::post('sign-table/', 'Admin\Sign\TableController@store')->name('sign-table.store');
+    Route::get('sign-table/{signEvent_id}', 'Admin\Sign\TableController@show')->name('sign-table.show');
+    Route::get('sign-table/{signEvent_id}/edit', 'Admin\Sign\TableController@edit')->name('sign-table.edit');
+    Route::patch('sign-table/{signEvent_id}/', 'Admin\Sign\TableController@update')->name('sign-table.update');
+    Route::delete('sign-table/{signEvent_id}/', 'Admin\Sign\TableController@destroy')->name('sign-table.destroy');
+    Route::get('sign-table/group/{group_id}', 'Admin\Sign\TableController@group')->name('sign-table.groupShow');
 
+});
+
+Route::group(['prefix' => 'sign'], function () {
+    Route::get('/sign-log/{signLog_id}', 'Sign\SignLogController@show')->name('signLog.show')->where('signLog_id', '[0-9]+');
+    Route::get('/sign-log/{status}', 'Sign\SignLogController@index')->name('signLog.index');
 });

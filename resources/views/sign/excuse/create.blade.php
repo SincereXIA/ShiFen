@@ -1,4 +1,4 @@
-@extends('layouts.app2')
+@extends('layouts.app')
 
 @section('content')
 
@@ -17,8 +17,12 @@
                         </ul>
                         <div class="clearfix"></div>
                     </div>
-                    <div class="x_content">
+                    <div class="x_content" style="background: url({{ asset('/image/xidian.jfif') }}) no-repeat 100% 0">
                         <br>
+                        <p style="font-weight: bold;font-size: medium">
+                            西安电子科技大学请假条<br>（网络存根）
+                        </p>
+                        <hr class="clearfix col-xs-12">
                         <form class="form-horizontal form-label-left" method="post"
                               action="{{ route('sign-excuse.store') }}">
 
@@ -27,7 +31,7 @@
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">姓名</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
                                     <input name="name" type="text" class="form-control" readonly="readonly"
-                                           value="{{ $auth->userInfo->real_name }}">
+                                           value="{{  $auth->userInfo? $auth->userInfo->real_name : $auth->name  }}">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -42,7 +46,7 @@
                                             class="required">*</span>
                                 </label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <textarea name="reason" class="form-control" rows="3" placeholder="请假原因"></textarea>
+                                    <textarea name="reason" class="form-control" rows="3" placeholder="（必填）"></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -50,7 +54,7 @@
                                 <div class="col-md-9 col-sm-9 col-xs-12">
                                     <input name="start_time" type="datetime-local"
                                            class="form-control has-feedback-left" id=""
-                                           value="{{ Carbon\Carbon::now() }}">
+                                           value="{{ Carbon\Carbon::now()->format('Y-m-d\TH:i:s') }}">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -58,7 +62,7 @@
                                 <div class="col-md-9 col-sm-9 col-xs-12">
                                     <input name="end_time" type="datetime-local" class="form-control has-feedback-left"
                                            id=""
-                                           value="{{ Carbon\Carbon::now() }}">
+                                           value="{{ Carbon\Carbon::now()->format('Y-m-d\TH:i:s') }}">
                                 </div>
                             </div>
 
@@ -67,10 +71,9 @@
                             <div class="form-group">
                                 <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
                                     {{ csrf_field() }}
-                                    <button type="button" class="btn btn-primary">Cancel</button>
-                                    <button type="reset" class="btn btn-primary">Reset</button>
-                                    <button type="submit" class="btn btn-success">Submit</button>
-                                    {{ Carbon\Carbon::now() }}
+                                    <a href="{{ back() }}" class="btn btn-primary">返回</a>
+                                    <button type="reset" class="btn btn-primary">重置</button>
+                                    <button type="submit" class="btn btn-success">提交</button>
                                 </div>
                             </div>
 

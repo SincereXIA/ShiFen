@@ -125,7 +125,7 @@ class UserController extends Controller
     {
         $excuses = [];
         if ($this->isLeave($user_id)) {
-            foreach (\DB::select('select * from `sign_excuses` where user_id = ' . (string)$user_id . ' AND UNIX_TIMESTAMP(end_at) > UNIX_TIMESTAMP()') as $dbExcuse) {
+            foreach (\DB::select('select * from `sign_excuses` where user_id = ' . (string)$user_id . ' AND UNIX_TIMESTAMP(end_at) > UNIX_TIMESTAMP()  AND UNIX_TIMESTAMP(start_at) < UNIX_TIMESTAMP()') as $dbExcuse) {
                 $excuses[] = SignExcuse::findOrFail($dbExcuse->id);
             }
         }

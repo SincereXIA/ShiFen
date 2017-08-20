@@ -26,4 +26,15 @@ class SignEvent extends Model
     {
         return $this->hasMany('App\SignLog', 'event_id', 'id');
     }
+
+    /**
+     * 签到项目的创建者
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function censor()
+    {
+        return $this->belongsTo('App\User', 'censor_id');
+    }
+
 }
