@@ -97,11 +97,11 @@
                             </tbody>
                         </table>
                         <button class="btn btn-warning btn-lg" type="submit">提交修改</button>
-                        <form action="{{ route('sign-table.destroy',$signEvent->id) }}" method="post">
-                            {{ csrf_field() }}
-                            {{ method_field('DELETE') }}
-                            <button class="btn btn-danger btn-lg" type="submit">删除此表</button>
-                        </form>
+                    </form>
+                    <form action="{{ route('sign-table.destroy',$signEvent->id) }}" method="post">
+                        {{ csrf_field() }}
+                        {{ method_field('DELETE') }}
+                        <button class="btn btn-danger btn-lg" type="submit">删除此表</button>
                     </form>
                 </div>
             </div>

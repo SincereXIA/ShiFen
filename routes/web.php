@@ -53,7 +53,7 @@ Route::group(['prefix' => '/home'], function () {
 
 //Route::resource('sign-table', 'Sign\TableController');
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => 'enterAdmin'], function () {
     Route::get('sign-excuse', 'Admin\Sign\ExcuseController@index')->name('sign-excuse.adminIndex');
     Route::get('sign-excuse/{excuse_id}', 'Admin\Sign\ExcuseController@show')->name('sign-excuse.adminShow');
     Route::patch('sign-excuse/{excuse_id}/pass', 'Admin\Sign\ExcuseController@pass')->name('sign-excuse.pass');

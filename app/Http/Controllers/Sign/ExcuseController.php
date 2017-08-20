@@ -51,6 +51,8 @@ class ExcuseController extends Controller
             'end_at' => Carbon::createFromFormat('Y-m-d\TH:i', $request->end_time)->toDateTimeString(),
             'reason' => $request->reason,
         ]);
+        \Session::flash('flash_info', '请假条已经提交，等待审核');
+        return redirect()->route('sign-excuse.index');
     }
 
     /**
@@ -91,6 +93,8 @@ class ExcuseController extends Controller
         $excuse->start_at = Carbon::createFromFormat('Y-m-d\TH:i', $request->start_at)->toDateTimeString();
         $excuse->end_at = Carbon::createFromFormat('Y-m-d\TH:i', $request->end_at)->toDateTimeString();
         $excuse->update();
+        \Session::flash('flash_info', '请假条修改成功');
+        return redirect()->route('sign-excuse.show', $id);
     }
 
     /**
@@ -102,5 +106,7 @@ class ExcuseController extends Controller
     public function destroy($id)
     {
         SignExcuse::destroy($id);
+        \Session::flash('flash_info', '请假条已删除');
+        return redirect()->route('sign-excuse.index');
     }
 }

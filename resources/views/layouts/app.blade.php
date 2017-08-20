@@ -177,5 +177,16 @@
         </script>
     @endforeach
 @endif
+
+@if (Session::has('flash_info'))
+    <script type="application/javascript">
+        new PNotify({
+            title: '通知',
+            text: '{{ Session::get('flash_info') }}',
+            type: 'info',
+            styling: 'bootstrap3'
+        });
+    </script>
+@endif
 </body>
 </html>

@@ -82,6 +82,7 @@ class TableController extends Controller
             }
             SignLog::create($signLog);
         }
+        \Session::flash('flash_info', '签到表成功保存');
         return redirect()->route('sign-table.show', $signEventId);
     }
 
@@ -141,6 +142,9 @@ class TableController extends Controller
 
         $signEvent->event_name = $request->event_name;
         $signEvent->update();
+        \Session::flash('flash_info', '签到表修改成功');
+        return redirect()->route('sign-table.show', $signEvent_id);
+
     }
 
     /**
@@ -158,6 +162,7 @@ class TableController extends Controller
             $signLog->delete();
         }
         SignEvent::destroy($signEvent_id);
+        \Session::flash('flash_info', '签到表已删除');
         return redirect()->route('sign-table.groupShow', $signEvent_id);
     }
 

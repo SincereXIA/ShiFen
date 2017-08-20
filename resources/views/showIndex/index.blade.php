@@ -62,6 +62,16 @@
 </head>
 <body>
 <header>
+    @if (Route::has('login'))
+        <div class="top-right links">
+            @if (Auth::check())
+                <a href="{{ url('/home') }}">主页</a>
+            @else
+                <a href="{{ url('/login') }}">登录</a>
+                <a href="{{ url('/register') }}">注册</a>
+            @endif
+        </div>
+    @endif
 </header>
 <main class="full-height flex-center">
     <div class="col-xs-12 text-center center-block">

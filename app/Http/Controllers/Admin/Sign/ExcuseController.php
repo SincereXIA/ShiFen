@@ -60,6 +60,7 @@ class ExcuseController extends Controller
         $excuse->status = 'ok';
         $excuse->censor_id = \Auth::id();
         $excuse->update();
+        \Session::flash('flash_info', '已批准请假条');
         return redirect()->route('sign-excuse.adminIndex');
     }
 
@@ -75,6 +76,7 @@ class ExcuseController extends Controller
         $excuse->status = 'refuse';
         $excuse->censor_id = \Auth::id();
         $excuse->update();
+        \Session::flash('flash_info', '已拒绝请假条');
         return redirect()->route('sign-excuse.adminIndex');
     }
 
