@@ -38,7 +38,7 @@
                         <input name="event_time" type="hidden" value="{{ \Carbon\Carbon::now() }}">
                         <input name="group_id" type="hidden" value="{{ $group->id }}">
                         <input name="censor_id" type="hidden" value="{{ Auth::id() }}">
-                        <p>点名 by {{ Auth::user()->userInfo->real_name }}</p>
+                        <p>点名 by {{ Auth::user()->userInfo? Auth::user()->userInfo->real_name : Auth::user()->name}}</p>
                         <p>时间 ：{{ \Carbon\Carbon::now() }}</p>
                         <hr>
                         <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap"

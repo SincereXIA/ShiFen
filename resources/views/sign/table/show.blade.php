@@ -35,7 +35,8 @@
                         <input name="event_name" type="text" class="form-control" readonly="readonly"
                                value="{{ $signEvent->event_name }}">
                     </div>
-                    <p><strong>点名 by {{ $signEvent->censor->userInfo->real_name }}</strong></p>
+                    <?php $censor = $signEvent->censor ?>
+                    <p><strong>点名 by {{ $censor->userInfo? $censor->userInfo->real_name : $censor->name }}</strong></p>
                     <p><strong>时间 ：{{ $signEvent->event_time }}</strong></p>
                     <hr>
                     <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap"

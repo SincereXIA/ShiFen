@@ -61,7 +61,8 @@
                                                 Student name
                                             </div>
                                             <p class="excerpt" style="font-size: medium;font-weight: bold">
-                                                {{ \App\User::findOrFail($signLog->user_id)->userInfo->real_name }}
+                                                <?php $user = \App\User::findOrFail($signLog->user_id) ?>
+                                                {{ $user->userInfo? $user->userInfo->real_name :$user->name }}
                                             </p>
                                         </div>
                                     </div>

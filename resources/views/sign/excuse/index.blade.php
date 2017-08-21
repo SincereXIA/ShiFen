@@ -84,7 +84,7 @@
                                                 <td style="line-height: 30px">{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $refuse->end_at)->diffForHumans() }}</td>
                                                 <td>
                                                     <a class="btn btn-sm btn-info"
-                                                       href="{{ route('sign-excuse.edit',$checking->id) }}">编辑</a>
+                                                       href="{{ route('sign-excuse.edit',$refuse->id) }}">编辑</a>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -127,7 +127,7 @@
                                                 <td style="line-height: 30px">{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $passe->end_at)->diffForHumans() }}</td>
                                                 <td style="line-height: 30px">
                                                     <a class="btn btn-sm btn-info"
-                                                       href="{{ route('sign-excuse.edit',$checking->id) }}">编辑</a>
+                                                       href="{{ route('sign-excuse.edit',$passe->id) }}">编辑</a>
                                                 </td>
                                             </tr>
                                         @endforeach

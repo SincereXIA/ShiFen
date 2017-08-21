@@ -32,8 +32,9 @@
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">姓名</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
+                                    <?php $user = \App\User::findOrFail($excuse->user_id) ?>
                                     <input name="name" type="text" class="form-control" readonly="readonly"
-                                           value="{{ \App\User::findOrFail($excuse->user_id)->userInfo->real_name }}">
+                                           value="{{ $user->userInfo? $user->userInfo->real_name :$user->name }}">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -71,7 +72,7 @@
                             <div class="ln_solid"></div>
                             <div class="form-group">
                                 <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
-                                    <a class="btn btn-primary" href="{{ back() }}">返回</a>
+                                    <a class="btn btn-primary" onclick="window.history.back()">返回</a>
                                     <button type="submit" class="btn btn-info">提交</button>
                                 </div>
                             </div>

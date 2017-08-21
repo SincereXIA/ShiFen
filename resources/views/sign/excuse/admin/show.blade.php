@@ -67,7 +67,7 @@
                             <div class="ln_solid"></div>
                             <div class="form-group">
                                 <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
-                                    <a class="btn btn-primary" href="{{ back() }}">返回</a>
+                                    <a class="btn btn-primary" onclick="window.history.back()">返回</a>
                                     <a class="btn btn-primary" href="{{ route('sign-excuse.edit',$excuse->id) }}">编辑</a>
                                     <input name="id" type="hidden" value="{{ $excuse->id }}">
                                     {{ csrf_field() }}
