@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('title')
+    {{ $signEvent->group->group_name }}签到表
+@endsection
 @section('css')
     <!-- Datatables -->
     <link href="{{ asset('/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css')}}" rel="stylesheet">

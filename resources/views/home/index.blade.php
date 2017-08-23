@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('title')
+    控制台
+@endsection
 @section('content')
 <div class="container">
     <div class="row">
@@ -64,6 +66,9 @@
                     <div class="x_content">
                         <a class="btn btn-app" href="{{ route('sign-excuse.adminIndex') }}">
                             <i class="fa fa-check-square-o"></i> 审核假条
+                        </a>
+                        <a class="btn btn-app" href="{{ route('sign-appeal.adminIndex') }}">
+                            <i class="fa fa-university"></i> 审核申诉
                         </a>
                         <a class="btn btn-app" href="{{ route('sign-table.index') }}">
                             <i class="fa fa-paper-plane"></i> 点名面板

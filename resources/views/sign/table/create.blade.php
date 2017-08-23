@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('title')
+    新建签到表
+@endsection
 @section('css')
     <!-- Datatables -->
     <link href="{{ asset('/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css')}}" rel="stylesheet">
@@ -38,8 +40,9 @@
                         <input name="event_time" type="hidden" value="{{ \Carbon\Carbon::now() }}">
                         <input name="group_id" type="hidden" value="{{ $group->id }}">
                         <input name="censor_id" type="hidden" value="{{ Auth::id() }}">
-                        <p>点名 by {{ Auth::user()->userInfo? Auth::user()->userInfo->real_name : Auth::user()->name}}</p>
-                        <p>时间 ：{{ \Carbon\Carbon::now() }}</p>
+                        <p style="font-size: medium">点名
+                            by {{ Auth::user()->userInfo? Auth::user()->userInfo->real_name : Auth::user()->name}}</p>
+                        <p style="font-size: medium">时间 ：{{ \Carbon\Carbon::now() }}</p>
                         <hr>
                         <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap"
                                cellspacing="0" width="100%">
@@ -51,18 +54,19 @@
                             </tr>
                             </thead>
                             <tbody>
+                            <?php $userController = new \App\Http\Controllers\UserController(); ?>
                             @foreach($users as $user)
                                 <tr>
                                     <td style="padding: 0 !important;margin: 0!important;">
                                         <div class="checkbox">
                                             <label>
-                                                <input name="{{$user->id}}" type="checkbox" class="flat"
-                                                       checked="checked">
+                                                <input name="{{$user->id}}" type="checkbox"
+                                                       class="flat" {{ $userController->isLeave($user->id)? '':'checked="checked"'  }}>
                                             </label>
                                         </div>
                                     </td>
-                                    <td>{{ $user->userInfo? $user->userInfo->real_name : $user->name }}</td>
-                                    <td>{{ $user->student_id }}</td>
+                                    <td style="font-size: large;font-weight: bold">{{ $user->userInfo? $user->userInfo->real_name : $user->name }}{{ $userController->isLeave($user->id)? '*':''  }}</td>
+                                    <td style="font-size: medium">{{ $user->student_id }}</td>
                                 </tr>
                             @endforeach
 

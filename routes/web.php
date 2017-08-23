@@ -60,16 +60,28 @@ Route::group(['prefix' => 'admin', 'middleware' => 'enterAdmin'], function () {
     Route::patch('sign-excuse/{excuse_id}/refuse', 'Admin\Sign\ExcuseController@refuse')->name('sign-excuse.refuse');
     Route::get('sign-table/', 'Admin\Sign\TableController@index')->name('sign-table.index');
     Route::get('sign-table/create/{group_id}', 'Admin\Sign\TableController@create')->name('sign-table.create');
+    Route::get('sign-table/create/formWifi/{group_id}', 'Admin\Sign\TableController@createFromWifi')->name('sign-table.createFromWifi');
     Route::post('sign-table/', 'Admin\Sign\TableController@store')->name('sign-table.store');
+    Route::post('sign-table/fromWifi', 'Admin\Sign\TableController@storeFromWifi')->name('sign-table.storeFromWifi');
     Route::get('sign-table/{signEvent_id}', 'Admin\Sign\TableController@show')->name('sign-table.show');
     Route::get('sign-table/{signEvent_id}/edit', 'Admin\Sign\TableController@edit')->name('sign-table.edit');
     Route::patch('sign-table/{signEvent_id}/', 'Admin\Sign\TableController@update')->name('sign-table.update');
-    Route::delete('sign-table/{signEvent_id}/', 'Admin\Sign\TableController@destroy')->name('sign-table.destroy');
+    Route::delete('sign-table/{signEvent_id}', 'Admin\Sign\TableController@destroy')->name('sign-table.destroy');
     Route::get('sign-table/group/{group_id}', 'Admin\Sign\TableController@group')->name('sign-table.groupShow');
+    Route::get('/sign-log/{signLog_id}/appeal', 'Admin\Sign\AppealController@adminShow')->name('sign-appeal.adminShow');
+    Route::patch('/sign-log/{signLog_id}/appeal/pass', 'Admin\Sign\AppealController@pass')->name('sign-appeal.pass');
+    Route::patch('/sign-log/{signLog_id}/appeal/refuse', 'Admin\Sign\AppealController@refuse')->name('sign-appeal.refuse');
+    Route::get('/sign-log/appeal', 'Admin\Sign\AppealController@index')->name('sign-appeal.adminIndex');
+    Route::delete('sign-log/{signLog_id}/appeal/', 'Admin\Sign\AppealController@destroy')->name('sign-appeal.destroy');
 
 });
 
 Route::group(['prefix' => 'sign'], function () {
     Route::get('/sign-log/{signLog_id}', 'Sign\SignLogController@show')->name('signLog.show')->where('signLog_id', '[0-9]+');
     Route::get('/sign-log/{status}', 'Sign\SignLogController@index')->name('signLog.index');
+    Route::get('/sign-log/{signLog_id}/appeal/create', 'Sign\SignAppealController@create')->name('sign-appeal.create');
+    Route::post('/sign-log/{signLog_id}/appeal', 'Sign\SignAppealController@store')->name('sign-appeal.store');
+    Route::get('/sign-log/{signLog_id}/appeal/create', 'Sign\SignAppealController@create')->name('sign-appeal.create');
+    Route::get('/sign-log/{signLog_id}/appeal', 'Sign\SignAppealController@show')->name('sign-appeal.show');
+
 });

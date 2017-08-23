@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('title')
+    编辑签到表
+@endsection
 @section('css')
     <!-- Datatables -->
     <link href="{{ asset('/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css')}}" rel="stylesheet">

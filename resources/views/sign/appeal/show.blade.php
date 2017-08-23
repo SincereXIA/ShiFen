@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-    {{ $signEvent->event_name }}签到情况
+    对签到项{{ $signEvent->event_name }}的申诉
 @endsection
 @section('content')
 
@@ -10,14 +10,18 @@
             <div class="col-md-8 col-sm-8 col-md-offset-2 col-sm-offset-2 col-xs-12">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>{{ $signEvent->event_name }} 签到情况
+                        <?php
+                        $signLog = $signAppeal->signLog;
+                        $signEvent = $signLog->signEvent;
+                        ?>
+                        <h2>对签到项：{{ $signEvent->event_name }} 的申诉
                         </h2>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content" style="background: url({{ asset('/image/xidian.jfif') }}) no-repeat 100% 0">
                         <br>
                         <p style="font-weight: bold;font-size: medium">
-                            签到详情
+                            申诉详情
                         </p>
                         <hr class="clearfix col-xs-12">
                         <div class="dashboard-widget-content">
@@ -103,7 +107,7 @@
                                     <div class="block">
                                         <div class="block_content">
                                             <h2 class="title">
-                                                到课状态
+                                                签到状态
                                             </h2>
                                             <div class="byline">
                                                 Status
@@ -118,6 +122,57 @@
                                                 @elseif($signLog->status == 'absent')
                                                     <span style="color: #BF0A10">旷课</span>
                                                 @endif
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="block">
+                                        <div class="block_content">
+                                            <h2 class="title">
+                                                申诉原因
+                                            </h2>
+                                            <div class="byline">
+                                                Group
+                                            </div>
+                                            <p class="excerpt" style="font-size: medium;font-weight: bold">
+                                                {{ $signAppeal->reason }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="block">
+                                        <div class="block_content">
+                                            <h2 class="title">
+                                                申诉状态
+                                            </h2>
+                                            <div class="byline">
+                                                Status
+                                            </div>
+                                            <p class="excerpt" style="font-size: medium;font-weight: bold">
+                                                @if($signAppeal->status == 'ok')
+                                                    <span style="color: #1b7e5a">申诉通过</span>
+                                                @elseif($signAppeal->status == 'checking')
+                                                    <span style="color: #99876D">审核中</span>
+                                                @elseif($signAppeal->status == 'refuse')
+                                                    <span style="color: #BF0A10">已拒绝</span>
+                                                @endif
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="block">
+                                        <div class="block_content">
+                                            <h2 class="title">
+                                                组织
+                                            </h2>
+                                            <div class="byline">
+                                                Group
+                                            </div>
+                                            <p class="excerpt" style="font-size: medium;font-weight: bold">
+                                                {{ $signEvent->group->group_name }}
                                             </p>
                                         </div>
                                     </div>

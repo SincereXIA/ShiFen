@@ -110,7 +110,7 @@ class UserController extends Controller
     public function isLeave($user_id)
     {
         if (count(\DB::select(
-                'select * from `sign_excuses` where user_id =' . (string)$user_id . ' AND UNIX_TIMESTAMP(end_at) > UNIX_TIMESTAMP()')) > 0) {
+                'select * from `sign_excuses` where user_id =' . (string)$user_id . ' AND UNIX_TIMESTAMP(end_at) > UNIX_TIMESTAMP() AND UNIX_TIMESTAMP(start_at) < UNIX_TIMESTAMP()')) > 0) {
             return true;
         } else
             return false;

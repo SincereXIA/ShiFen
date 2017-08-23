@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('title')
+    项目进展
+@endsection
 @section('content')
     <div class="row" style="background-color: white">
         <div id="title" style="text-align: center;">

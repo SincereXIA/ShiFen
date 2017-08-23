@@ -46,7 +46,7 @@ class ExcuseController extends Controller
     {
         $excuse = new SignExcuse();
         $excuse::create([
-            'user_id' => User::where('student_id', '=', $request->student_id)->firstOrFail()->id,
+            'user_id' => Auth::id(),
             'start_at' => Carbon::createFromFormat('Y-m-d\TH:i', $request->start_time)->toDateTimeString(),
             'end_at' => Carbon::createFromFormat('Y-m-d\TH:i', $request->end_time)->toDateTimeString(),
             'reason' => $request->reason,
@@ -89,6 +89,8 @@ class ExcuseController extends Controller
     public function update(Request $request, $id)
     {
         $excuse = SignExcuse::findOrFail($id);
+        if ($excuse->status == 'ok')
+            abort('403', '禁止修改已经通过的请假条');
         $excuse->reason = $request->reason;
         $excuse->start_at = Carbon::createFromFormat('Y-m-d\TH:i', $request->start_at)->toDateTimeString();
         $excuse->end_at = Carbon::createFromFormat('Y-m-d\TH:i', $request->end_at)->toDateTimeString();

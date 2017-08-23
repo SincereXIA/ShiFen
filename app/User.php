@@ -97,4 +97,13 @@ class User extends Authenticatable
         return $this->groups()->whereIn('group_id', \DB::table('groups')->whereNotNull('admin_group_id')->pluck('admin_group_id'));
     }
 
+    /**
+     * 用户申诉
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function signAppeals()
+    {
+        return $this->hasMany('App\SignAppeal', 'user_id');
+    }
 }

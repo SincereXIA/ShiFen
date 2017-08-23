@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('title')
+    编辑假条
+@endsection
 @section('content')
 
     <div class="container">

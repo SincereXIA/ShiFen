@@ -1,12 +1,10 @@
 @extends('layouts.app')
-@section('title')
-    我的假条
-@endsection
+
 @section('content')
     <div class="row">
         <div class="x_panel">
             <div class="x_title">
-                <h2><i class="fa fa-align-left"></i> 我的请假条
+                <h2><i class="fa fa-align-left"></i> 我的申诉
                     <small>Sessions</small>
                 </h2>
                 <div class="clearfix"></div>
@@ -19,7 +17,7 @@
                         <a class="panel-heading" role="tab" id="headingOne1" data-toggle="collapse"
                            data-parent="#accordion1" href="#collapseOne1" aria-expanded="true"
                            aria-controls="collapseOne">
-                            <h4 class="panel-title">审核中的请假条</h4>
+                            <h4 class="panel-title">审核中的申诉</h4>
                         </a>
                         <div id="collapseOne1" class="panel-collapse collapse in" role="tabpanel"
                              aria-labelledby="headingOne" aria-expanded="true" style="">
@@ -62,7 +60,7 @@
                         <a class="panel-heading collapsed" role="tab" id="headingTwo1" data-toggle="collapse"
                            data-parent="#accordion1" href="#collapseTwo1" aria-expanded="false"
                            aria-controls="collapseTwo">
-                            <h4 class="panel-title">未通过的请假条</h4>
+                            <h4 class="panel-title">未通过的申诉</h4>
                         </a>
                         <div id="collapseTwo1" class="panel-collapse collapse" role="tabpanel"
                              aria-labelledby="headingTwo" aria-expanded="false" style="height: 0px;">
@@ -105,7 +103,7 @@
                         <a class="panel-heading collapsed" role="tab" id="headingThree1" data-toggle="collapse"
                            data-parent="#accordion1" href="#collapseThree1" aria-expanded="false"
                            aria-controls="collapseThree">
-                            <h4 class="panel-title">已通过的请假条</h4>
+                            <h4 class="panel-title">已通过的申诉</h4>
                         </a>
                         <div id="collapseThree1" class="panel-collapse collapse" role="tabpanel"
                              aria-labelledby="headingThree" aria-expanded="false" style="height: 0px;">

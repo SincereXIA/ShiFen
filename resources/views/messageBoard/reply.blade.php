@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('title')
+    回复
+@endsection
 @section('content')
     <div class="col-md-5 col-md-offset-1">
         <div class="panel panel-info">

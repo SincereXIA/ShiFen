@@ -23,7 +23,7 @@ class ExcuseController extends Controller
         $users = Group::findOrFail($group_id)->users()->orderBy('id')->get();
         foreach ($users as $user) {
             if ($user->signExcuses()->where('status', 'checking')->count() > 0)
-                foreach ($user->signExcuses as $signExcuse) {
+                foreach ($user->signExcuses()->where('status', 'checking')->get() as $signExcuse) {
                     $signExcuses[] = $signExcuse;
                 }
         }

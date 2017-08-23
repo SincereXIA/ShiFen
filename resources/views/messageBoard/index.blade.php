@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('title')
+    留言板
+@endsection
 @section('content')
     @include('messageBoard.create')
     <?php

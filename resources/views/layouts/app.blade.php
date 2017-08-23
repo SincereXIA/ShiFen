@@ -8,7 +8,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 
-    <title>拾纷|@yield('title')</title>
+    <title>@yield('title') - 拾纷</title>
 
     <!-- Bootstrap -->
     <link href="{{ asset('vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -25,6 +25,15 @@
 
     <!-- Custom styling plus plugins -->
     <link href="{{ asset('build/css/custom.min.css') }}" rel="stylesheet">
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?12f589ed27a21c73fbd56210da5394a3";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
     @yield('css')
 </head>
 
@@ -62,9 +71,14 @@
                         <div class="menu_section">
                             <h3>管理面板</h3>
                             <ul class="nav side-menu">
-                                <li><a href="{{ route('sign-excuse.adminIndex') }}"><i class="fa fa-home"></i> 审核假条 </a>
+                                <li><a href="{{ route('sign-excuse.adminIndex') }}"><i class="fa fa-check-square-o"></i>
+                                        审核假条 </a>
                                 </li>
-                                <li><a href="{{ route('sign-table.index') }}"><i class="fa fa-edit"></i> 点名面板 </a>
+                                <li><a href="{{ route('sign-appeal.adminIndex') }}"><i class="fa fa-university"></i>
+                                        审核申诉 </a>
+                                </li>
+                                <li><a href="{{ route('sign-table.index') }}"><i class="fa fa-paper-plane"></i> 点名面板
+                                    </a>
                                 </li>
                             </ul>
                         </div>
@@ -127,7 +141,7 @@
         <!-- footer content -->
         <footer>
             @yield('footer')
-            <div class="clearfix"></div>
+            <div class="clearfix" style="text-align: center">Copyright © 2017 SincereXIA, XDU Univ.</div>
         </footer>
         <!-- /footer content -->
     </div>

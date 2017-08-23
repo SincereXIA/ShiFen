@@ -39,4 +39,14 @@ class SignLog extends Model
         return $this->belongsTo('App\SignEvent', 'event_id', 'id');
     }
 
+    /**
+     * 签到记录的申诉
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function signAppeal()
+    {
+        return $this->hasOne('App\SignAppeal', 'log_id', 'id');
+    }
+
 }

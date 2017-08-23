@@ -14,7 +14,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
     <!-- Title of your website goes here -->
-    <title>拾纷 - @yield('title')</title>
+    <title>拾纷 - 关于</title>
 
     <!-- Your website's description for SEO -->
     <meta name="description" content="" />

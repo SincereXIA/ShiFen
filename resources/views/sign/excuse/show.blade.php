@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('title')
+    查看假条
+@endsection
 @section('content')
 
     <div class="container">

@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('title')
+    所有点名项
+@endsection
 @section('css')
     <style type="text/css">
         li[role="presentation"] {
@@ -109,7 +112,13 @@
                                             <td>
                                                 <a class="btn btn-sm btn-info"
                                                    href="{{ route('signLog.show',$lateSignLog->id) }}">详情</a>
-                                                <a class="btn btn-default btn-sm">质询</a>
+                                                @if($lateSignLog->signAppeal == null)
+                                                    <a class="btn btn-default btn-sm"
+                                                       href="{{ route('sign-appeal.create',$lateSignLog->id) }}">质询</a>
+                                                @else
+                                                    <a class="btn btn-default btn-sm"
+                                                       href="{{ route('sign-appeal.show',$lateSignLog->signAppeal->id) }}">查看质询</a>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach
@@ -150,7 +159,13 @@
                                             <td>
                                                 <a class="btn btn-sm btn-info"
                                                    href="{{ route('signLog.show',$offSignLog->id) }}">详情</a>
-                                                <a class="btn btn-default btn-sm">质询</a>
+                                                @if($offSignLog->signAppeal == null)
+                                                    <a class="btn btn-default btn-sm"
+                                                       href="{{ route('sign-appeal.create',$offSignLog->id) }}">质询</a>
+                                                @else
+                                                    <a class="btn btn-default btn-sm"
+                                                       href="{{ route('sign-appeal.show',$offSignLog->signAppeal->id) }}">查看质询</a>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach
@@ -191,7 +206,13 @@
                                             <td>
                                                 <a class="btn btn-sm btn-info"
                                                    href="{{ route('signLog.show',$absentSignLog->id) }}">详情</a>
-                                                <a class="btn btn-default btn-sm">质询</a>
+                                                @if($absentSignLog->signAppeal == null)
+                                                    <a class="btn btn-default btn-sm"
+                                                       href="{{ route('sign-appeal.create',$absentSignLog->id) }}">质询</a>
+                                                @else
+                                                    <a class="btn btn-default btn-sm"
+                                                       href="{{ route('sign-appeal.show',$absentSignLog->signAppeal->id) }}">查看质询</a>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach

@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('title')
+    {{ $group->group_name }}的签到表
+@endsection
 @section('css')
     <!-- Datatables -->
     <link href="{{ asset('/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css')}}" rel="stylesheet">
@@ -20,7 +22,7 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>{{ $group->group_name }}的签到表</h2>
+                    <h1>{{ $group->group_name }}的签到表</h1>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">

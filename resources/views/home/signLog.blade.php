@@ -1,11 +1,12 @@
 @extends('layouts.app')
-
+@section('title')
+    点名概要
+@endsection
 @section('content')
     <div class="row">
         <div class="x_panel">
             <div class="x_title">
                 <h2><i class="fa fa-align-left"></i> 概要
-                    <small>Sessions</small>
                 </h2>
                 <div class="clearfix"></div>
             </div>

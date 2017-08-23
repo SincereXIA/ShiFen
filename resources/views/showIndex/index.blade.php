@@ -59,6 +59,15 @@
             margin-bottom: 30px;
         }
     </style>
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?12f589ed27a21c73fbd56210da5394a3";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
 </head>
 <body>
 <header>
@@ -79,9 +88,9 @@
             <h1 class="title">拾纷</h1>alpha
         </div>
         <div class="col-xs-10 col-xs-offset-1 links">
-            <a class="col-xs-6 col-md-3" href="{{ url('/about') }}">关于拾纷</a>
+            <a class="col-xs-6 col-md-3" href="{{ url('/home') }}">进入拾纷</a>
             <a class="col-xs-6 col-md-3" href="{{ url('/progress') }}">项目进展</a>
-            <a class="col-xs-6 col-md-3" href="http://blog.sumblog.cn">作者主页</a>
+            <a class="col-xs-6 col-md-3" href="{{ url('/about') }}">关于拾纷</a>
             <a class="col-xs-6 col-md-3" href="{{ route('messageBoard.index') }}">留言板</a>
         </div>
     </div>
