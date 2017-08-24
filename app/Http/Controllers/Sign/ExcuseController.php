@@ -94,6 +94,7 @@ class ExcuseController extends Controller
         $excuse->reason = $request->reason;
         $excuse->start_at = Carbon::createFromFormat('Y-m-d\TH:i', $request->start_at)->toDateTimeString();
         $excuse->end_at = Carbon::createFromFormat('Y-m-d\TH:i', $request->end_at)->toDateTimeString();
+        $excuse->ststus = 'checking';
         $excuse->update();
         \Session::flash('flash_info', '请假条修改成功');
         return redirect()->route('sign-excuse.show', $id);

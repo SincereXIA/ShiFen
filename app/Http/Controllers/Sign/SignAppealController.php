@@ -70,30 +70,39 @@ class SignAppealController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param $signAppeal_id
+     * @param $signLog_id
      * @return \Illuminate\Http\Response
+     * @internal param $signAppeal_id
      * @internal param int $id
      */
-    public function edit($signAppeal_id)
+    public function edit($signLog_id)
     {
-        $signAppeal = SignAppeal::findOrFail($signAppeal_id);
-        $signLog = $signAppeal->signLog;
+        $signLog = SignLog::findOrFail($signLog_id);
+        $signAppeal = $signLog->signAppeal;
         if ($signAppeal->status == 'ok')
             abort('403', '当申诉已通过时，不能进行修改');
         $user = $signLog->user;
-        return view('sign.appeal.create', compact('signLog', 'user'));
+        return view('sign.appeal.edit', compact('signLog', 'user', 'signAppeal'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param $signLog_id
      * @return \Illuminate\Http\Response
+     * @internal param int $id
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $signLog_id)
     {
-        //
+        $signAppeal = SignLog::findOrFail($signLog_id)->signAppeal;
+        if ($signAppeal->status == 'ok')
+            abort('403', '禁止修改已经通过的申诉');
+        $signAppeal->reason = $request->reason;
+        $signAppeal->status = 'checking';
+        $signAppeal->update();
+        \Session::flash('flash_info', '申诉修改成功');
+        return redirect()->route('signLog.index', SignLog::findOrFail($signLog_id)->status);
     }
 
     /**

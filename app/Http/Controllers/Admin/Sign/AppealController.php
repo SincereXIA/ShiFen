@@ -44,7 +44,7 @@ class AppealController extends Controller
             }
         }
         $adminGroups = \Auth::user()->adminGroups;
-        return view('sign.Appeal.admin.index', compact('adminGroups', 'allAdminAtGroups', 'groupAppeals'));
+        return view('sign.appeal.admin.index', compact('adminGroups', 'allAdminAtGroups', 'groupAppeals'));
     }
 
     /**

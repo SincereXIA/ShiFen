@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-    对签到项{{ $signEvent->event_name }}的申诉
+    查看申诉
 @endsection
 @section('content')
 
@@ -24,6 +24,12 @@
                             申诉详情
                         </p>
                         <hr class="clearfix col-xs-12">
+                        @if($signAppeal->status == 'refuse')
+                            <p style="color: #BF0A10">
+                                很抱歉，申诉已经被拒绝，你可以 <a href="{{ route('sign-appeal.edit',$signLog->id) }}"
+                                                   style="color: #1b607f">修改后重新申诉</a>
+                            </p>
+                        @endif
                         <div class="dashboard-widget-content">
 
                             <ul class="list-unstyled timeline widget">
@@ -179,6 +185,7 @@
                                 </li>
                             </ul>
                             <a onclick="window.history.back()" class="btn btn-lg btn-default">返回</a>
+                            <a class="btn btn-lg btn-default" href="{{ route('sign-appeal.edit',$signLog->id) }}">编辑</a>
                         </div>
                     </div>
                 </div>

@@ -83,5 +83,7 @@ Route::group(['prefix' => 'sign'], function () {
     Route::post('/sign-log/{signLog_id}/appeal', 'Sign\SignAppealController@store')->name('sign-appeal.store');
     Route::get('/sign-log/{signLog_id}/appeal/create', 'Sign\SignAppealController@create')->name('sign-appeal.create');
     Route::get('/sign-log/{signLog_id}/appeal', 'Sign\SignAppealController@show')->name('sign-appeal.show');
+    Route::get('sign-log/{signLog_id}/appeal/edit', 'Sign\SignAppealController@edit')->name('sign-appeal.edit');
+    Route::patch('sign-log/{signLog_id}/appeal', 'Sign\SignAppealController@update')->name('sign-appeal.update');
 
 });
