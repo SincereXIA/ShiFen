@@ -49,6 +49,7 @@ Route::group(['prefix' => '/home'], function () {
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('/sign-log', 'HomeController@signLog')->name('userSignLog');
     Route::resource('sign-excuse', 'Sign\ExcuseController');
+    Route::post('/finishUserInfo', 'HomeController@StoreFinishUserInfo')->name('finishUserInfo.store');
 });
 
 //Route::resource('sign-table', 'Sign\TableController');

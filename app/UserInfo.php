@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class UserInfo extends Model
 {
     protected $table = 'user_infos';
+    protected $fillable = ['user_id', 'gender', 'real_name', 'phone_number'];
 
     /**
      * 该用户信息对应的用户
