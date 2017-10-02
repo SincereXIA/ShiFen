@@ -51,6 +51,7 @@ Route::group(['prefix' => '/home', 'middleware' => 'auth'], function () {
     Route::resource('sign-excuse', 'Sign\ExcuseController');
     Route::get('/user-info', 'HomeController@showUserInfo')->name('userInfo.show');
     Route::post('/finishUserInfo', 'HomeController@StoreFinishUserInfo')->name('finishUserInfo.store');
+    Route::get('/messagecenter', 'Auth\Messagecontroller@index')->name('messageCenter');
 });
 
 //Route::resource('sign-table', 'Sign\TableController');

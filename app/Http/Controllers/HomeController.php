@@ -35,7 +35,19 @@ class HomeController extends Controller
         } else {
             $adminRight = false;
         }
-        return view('home.index', compact('auth', 'adminRight'));
+
+        foreach ($auth->notifications as $notification) {
+            $type = $notification->type;
+            $data = $notification->data;
+            $error[] = $data['title'];
+        }
+
+        if (isset($error)) {
+            return view('home.index', compact('auth', 'adminRight'))->withErrors($error);
+        } else {
+            return view('home.index', compact('auth', 'adminRight'));
+        }
+
     }
 
     public function signLog()

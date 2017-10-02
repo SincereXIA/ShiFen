@@ -29,5 +29,13 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('firstUserInfo', 'App\Policies\UserPolicy@firstUserInfo');
         Gate::define('showUserInfo', 'App\Policies\UserPolicy@showUserInfo');
+        Gate::define('editSignTable', function ($user, $signEvent) {
+            if ($signEvent->censor == $user) {
+                return true;
+            } elseif ($signEvent->group->adminUser == $user) {
+                return true;
+            }
+            return false;
+        });
     }
 }

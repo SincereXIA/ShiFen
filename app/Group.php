@@ -35,4 +35,14 @@ class Group extends Model
     {
         return $this->hasMany('App\Group', 'admin_group_id', 'id');
     }
+
+    /**
+     * 本组的最高管理员
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function adminUser()
+    {
+        return $this->belongsTo('App\User', 'admin_id', 'id');
+    }
 }

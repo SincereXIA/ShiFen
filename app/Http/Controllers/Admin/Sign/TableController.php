@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Sign;
 
 use App\Group;
 use App\Http\Controllers\UserController;
+use App\Notifications\SignEventNotification;
 use App\SignEvent;
 use App\SignLog;
 use App\User;
@@ -86,6 +87,13 @@ class TableController extends Controller
                     $signLog['excuse_id'] = $userController->getExcuses($user->id)[0]->id;
                 } else {
                     $signLog['status'] = 'absent';
+                    $messageInformation = array();
+                    $messageInformation['title'] = "【系统通知】 $signEvent->event_name 未签到";
+                    $messageInformation['body'] = "【系统通知】 $signEvent->event_name 未签到";
+                    $messageInformation['level'] = 'urgent';
+                    $messageInformation['creator'] = \Auth::id();
+                    $messageInformation['time'] = Carbon::now()->timestamp;
+                    $user->notify(new SignEventNotification($messageInformation));
                 }
             }
             SignLog::create($signLog);
@@ -140,6 +148,8 @@ class TableController extends Controller
     public function edit($signEvent_id)
     {
         $signEvent = SignEvent::findOrFail($signEvent_id);
+        if (\Gate::denies('editSignTable', $signEvent))
+            abort('403', '只有超级管理员或事件的创建者可以修改签到表');
         $signLogs = $signEvent->signLogs()->orderBy('user_id')->get();
         return view('sign.table.edit', compact('signEvent', 'signLogs'));
     }
@@ -154,6 +164,10 @@ class TableController extends Controller
      */
     public function update(Request $request, $signEvent_id)
     {
+        $signEvent = SignEvent::findOrFail($signEvent_id);
+        if (\Gate::denies('editSignTable', $signEvent))
+            abort('403', '只有超级管理员或事件的创建者可以修改签到表');
+
         $signEvent = SignEvent::findOrfail($signEvent_id);
         $signLogs = $signEvent->signLogs()->get();
 

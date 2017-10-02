@@ -41,14 +41,6 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="password" class="col-md-4 control-label">特征校验</label>
-
-                            <div class="col-md-6 col-xs-12">
-                                {!! Geetest::render() !!}
-                            </div>
-                        </div>
-
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
