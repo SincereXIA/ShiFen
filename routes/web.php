@@ -45,10 +45,11 @@ Route::group(['prefix' => '/superadmin', 'middleware' => 'superAdmin'], function
     Route::get('/', 'AdminController@index');
 });
 
-Route::group(['prefix' => '/home'], function () {
+Route::group(['prefix' => '/home', 'middleware' => 'auth'], function () {
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('/sign-log', 'HomeController@signLog')->name('userSignLog');
     Route::resource('sign-excuse', 'Sign\ExcuseController');
+    Route::get('/user-info', 'HomeController@showUserInfo')->name('userInfo.show');
     Route::post('/finishUserInfo', 'HomeController@StoreFinishUserInfo')->name('finishUserInfo.store');
 });
 
@@ -88,3 +89,5 @@ Route::group(['prefix' => 'sign'], function () {
     Route::patch('sign-log/{signLog_id}/appeal', 'Sign\SignAppealController@update')->name('sign-appeal.update');
 
 });
+
+Route::any('/wechat', 'WeChatController@serve');

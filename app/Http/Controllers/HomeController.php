@@ -35,8 +35,7 @@ class HomeController extends Controller
         } else {
             $adminRight = false;
         }
-        \Session::flash('flash_info', '欢迎您，感谢您参与拾纷的内部测试，若您在测试中发现了任何问题，或是有好的建议，请与作者联系');
-        return view('home.index', compact('auth', 'adminRight'))->withErrors(['拾纷目前处于建构状态！']);
+        return view('home.index', compact('auth', 'adminRight'));
     }
 
     public function signLog()
@@ -100,5 +99,17 @@ class HomeController extends Controller
         $user->update();
         \Session::flash('flash_info', '信息初始化成功');
         return redirect()->route('home');
+    }
+
+    /**
+     * 展示用户自己的个人信息
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function showUserInfo()
+    {
+        $user = Auth::user();
+        $userInfo = $user->userInfo;
+        return view('auth.userInfo.show', compact('user', 'userInfo'));
     }
 }

@@ -41,7 +41,7 @@ class TableController extends Controller
     public function create($group_id)
     {
         $group = Group::findOrFail($group_id);
-        $users = $group->users;
+        $users = $group->users()->orderBy('student_id')->get();
         return view('sign.table.create', compact('group', 'users'));
     }
 

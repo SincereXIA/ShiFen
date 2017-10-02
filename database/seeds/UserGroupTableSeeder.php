@@ -13,10 +13,10 @@ class UserGroupTableSeeder extends Seeder
     {
         //
         $cols = [];
-        for ($i = 5; $i < 35; $i++) {
+        for ($i = 36; $i < 65; $i++) {
             $col = [
                 'user_id' => $i,
-                'group_id' => 7,
+                'group_id' => 9,
             ];
             $cols[] = $col;
         }

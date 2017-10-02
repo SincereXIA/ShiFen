@@ -48,6 +48,9 @@
                     <a class="btn btn-app" href="{{ route('sign-excuse.create') }}">
                         <i class="fa fa-pencil"></i> 新建请假
                     </a>
+                    <a class="btn btn-app" href="{{ route('userInfo.show') }}">
+                        <i class="fa fa-pencil"></i> 个人信息
+                    </a>
                 </div>
             </div>
         </div>

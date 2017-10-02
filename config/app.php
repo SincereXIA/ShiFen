@@ -181,6 +181,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Germey\Geetest\GeetestServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        Overtrue\LaravelWechat\ServiceProvider::class,
 
     ],
 
@@ -233,6 +234,7 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'Geetest' => Germey\Geetest\Geetest::class,
+        'EasyWeChat' => Overtrue\LaravelWechat\Facade::class,
 
     ],
 
