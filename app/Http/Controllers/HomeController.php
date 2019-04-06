@@ -36,11 +36,11 @@ class HomeController extends Controller
             $adminRight = false;
         }
 
-        foreach ($auth->notifications as $notification) {
+        /*foreach ($auth->notifications as $notification) {
             $type = $notification->type;
             $data = $notification->data;
             $error[] = $data['title'];
-        }
+        }*/
 
         if (isset($error)) {
             return view('home.index', compact('auth', 'adminRight'))->withErrors($error);
